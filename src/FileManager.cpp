@@ -3,20 +3,33 @@
 //
 
 #include "FileManager.h"
+#include "Profesor.h"
 
 /**
  * This function save data into Text File
- * @param physicalProduct the object to save in the text file
  * @param fileName the name of the text file
  */
-void FileManager::save(const PhysicalProduct &physicalProduct, const string &fileName) {
-
+void FileManager::save(ManagerProfessor &Container, const string &filename) {
+//    bool ManagerProfessor::existeProfesor(string ced) {
+  //      for (size_t i = 0; i < professorContainer.size(); ++i) {
+    //        if (professorContainer[i]->getCedula()==ced)
+      //          return true;
+        //}
+        //return false;
+    //}
     // Create and open a text file
-    ofstream myFile(fileName, ios_base::app);
+    ofstream myFile(filename, ios_base::app);
 
     // Write to the file
-    myFile << physicalProduct.toString() << endl;
+    myFile << "cedula,nombre,edad,titulo" << endl;
 
+    for (int i = 0; i < Container.getContainer().size(); ++i) {
+        myFile << Container.getContainer()[i]->getCedula()<<",";
+        myFile << Container.getContainer()[i]->getNombre()<<",";
+        myFile << Container.getContainer()[i]->getEdad()<<",";
+        myFile << Container.getContainer()[i]->getTitulo()<<","<<endl;
+
+    }
     // Close the file
     myFile.close();
 }
